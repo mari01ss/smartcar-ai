@@ -105,7 +105,7 @@ h1, h2, h3 {
 
 # ===================== SESSION =====================
 if "page" not in st.session_state:
-    st.session_state.page = "Dashboard"
+    st.session_state.page = "Landing"
 
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
