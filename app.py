@@ -1,28 +1,21 @@
 import streamlit as st
 import random
 import time
-from groq import Groq
+import google.generativeai as genai
 
-# ===================== AI =====================
-client = Groq(api_key=st.secrets["GROQ_API_KEY"])
+genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
 
-system_prompt = """
-You are SmartCar AI assistant.
-
-You diagnose car problems clearly and shortly.
-You help with repair, maintenance, costs, and safety.
-"""
+model = genai.GenerativeModel("gemini-1.5-flash")
 
 def ai(msg):
     try:
-        res = client.chat.completions.create(
-            model="llama-3.1-8b-instant",
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": msg}
-            ]
-        )
-        return res.choices[0].message.content
+        prompt = f"""
+        {system_prompt}
+        
+        User request: {msg}
+        """
+        response = model.generate_content(prompt)
+        return response.text
     except Exception as e:
         return str(e)
 
