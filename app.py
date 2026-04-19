@@ -1,27 +1,23 @@
 import streamlit as st
 import random
 import time
-import google.generativeai as genai
+from google import genai
 
-genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
-
-model = genai.GenerativeModel("gemini-1.5-flash")
+client = genai.Client(api_key=st.secrets["GEMINI_API_KEY"])
 
 system_prompt = """
 You are SmartCar AI assistant.
 
 You diagnose car problems clearly and shortly.
 You help with repair, maintenance, costs, and safety.
-""" 
+"""
 
 def ai(msg):
     try:
-        prompt = f"""
-        {system_prompt}
-
-        User request: {msg}
-        """
-        response = model.generate_content(prompt)
+        response = client.models.generate_content(
+            model="gemini-1.5-flash",
+            contents=system_prompt + "\n\nUser: " + msg
+        )
         return response.text
     except Exception as e:
         return str(e)
