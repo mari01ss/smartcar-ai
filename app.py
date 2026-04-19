@@ -7,6 +7,13 @@ genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
 
 model = genai.GenerativeModel("gemini-1.5-flash")
 
+system_prompt = """
+You are SmartCar AI assistant.
+
+You diagnose car problems clearly and shortly.
+You help with repair, maintenance, costs, and safety.
+""" 
+
 def ai(msg):
     try:
         prompt = f"""
