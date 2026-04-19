@@ -117,27 +117,49 @@ st.caption("AI-powered vehicle intelligence & diagnostics")
 
 
 # ===================== NAV =====================
-col1, col2, col3, col4 = st.columns(4)
+col1, col2, col3, col4, col5 = st.columns(5)
 
 with col1:
+    if st.button("🏠 Landing"):
+        st.session_state.page = "Landing"
+        
+with col2:
     if st.button("🏠 Dashboard"):
         st.session_state.page = "Dashboard"
 
-with col2:
+with col3:
     if st.button("📊 Diagnostics"):
         st.session_state.page = "Diagnostics"
 
-with col3:
+with col4:
     if st.button("💬 AI Chat"):
         st.session_state.page = "Chat"
 
-with col4:
+with col5:
     if st.button("⚙ Smart Center"):
         st.session_state.page = "Smart"
 
 page = st.session_state.page
 
+if page == "Landing":
 
+    st.title("🚗 SmartCar AI")
+    st.subheader("Your intelligent car assistant")
+
+    st.markdown("""
+    <div style="padding:20px;background:white;border-radius:15px;box-shadow:0 5px 20px rgba(0,0,0,0.1)">
+    
+    🚀 Diagnose your car instantly with AI  
+    🔧 Get repair suggestions  
+    💰 Track your car expenses  
+    📍 Find nearest service centers  
+    🎤 Smart voice assistant  
+    
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.button("🚀 Open App", on_click=lambda: st.session_state.update({"page":"Dashboard"}))
+    
 # ===================== 1. DASHBOARD =====================
 if page == "Dashboard":
 
