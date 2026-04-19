@@ -5,7 +5,7 @@ import google.generativeai as genai
 
 genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
 
-model = genai.GenerativeModel("models/gemini-1.5-pro-latest")
+model = genai.GenerativeModel("gemini-1.5-flash")
 
 system_prompt = """
 You are SmartCar AI assistant.
@@ -18,14 +18,13 @@ def ai(msg):
     try:
         prompt = f"""
         {system_prompt}
-        
+
         User request: {msg}
         """
         response = model.generate_content(prompt)
         return response.text
     except Exception as e:
         return str(e)
-
 
 # ===================== EXTRA AI =====================
 def sound_ai():
