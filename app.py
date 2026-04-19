@@ -5,7 +5,7 @@ import google.generativeai as genai
 
 genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
 
-model = genai.GenerativeModel("gemini-pro")
+model = genai.GenerativeModel("models/gemini-1.5-pro-latest")
 
 system_prompt = """
 You are SmartCar AI assistant.
